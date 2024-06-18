@@ -13,8 +13,9 @@ class BarrierMiddle
     {
         $username = $request -> get("username");        
         $ipaddr = $request -> ip();
-        $cnt = Redis::hexists($username,$ipaddr) ? Redis::hget($username,$ipaddr) : 0;
-        $flag = $cnt >= self::barrier_cnt ? true : false;  // 是否拦截
+
+        $fault_cnt = Redis::hexists($username,$ipaddr) ? Redis::hget($username,$ipaddr) : 0;
+        $flag = $fault_cnt >= self::barrier_cnt ? true : false;  // 是否拦截
 
         if($flag)
         {

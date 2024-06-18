@@ -17,18 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/nihao', function () {
-    return 'nihao';
-});
-
-Route::post('/test',function () {
-    return "nihao";
-});
-
 use Illuminate\Support\Facades\Redis;
 Route::get('/info',function () {
 
@@ -51,35 +39,15 @@ Route::get('/url',function (Request $request) {
     ]));
 });
 
-Route::get('/success', function () {
-    return view('login/success',['username'=> 'admin','password'=> '123456','message' => 'testlogin']);
-});
-
-
-
-Route::get('/mylogin', function() {
-    return view('login');
-}) -> name('loginmain');
-
-// Route::get('/loginerror',function () {
-//     return view('login/error');
-// }) -> name('loginerror');
 
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\loginErrorController;
 
-Route::post('/getform',[loginController::class,'show']);
-
-
-
-Route::get('/loginlogin', function() {
+Route::get('/login', function() {
     return view('login/login');
-}) -> name('loginlogin');
+}) -> name('login');
 
 Route::get('/loginerror', [loginErrorController::class, 'show']) -> name('loginerror');
 
-
 Route::any('/logincheck', [loginController::class, 'show']
-    // return view('login/success',['username'=> "12",'password'=> "123",'message' => "nihao"]);
-    // return view('welcome');
 );
